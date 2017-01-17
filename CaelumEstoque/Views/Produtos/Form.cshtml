@@ -1,0 +1,25 @@
+﻿<form action="/Produtos/Adiciona" method="post">
+    <label for="nome">Nome:</label>
+    <input id="nome" name="produto.Nome" value="@ViewBag.Produtos.Nome" class="form-control"/>
+    @Html.ValidationMessage("produto.Nome")
+    <br />
+    <label for="preco">Preço:</label>
+    <input id="preco" name="produto.Preco" value="@ViewBag.Produtos.Preco" class="form-control" />
+    <br />
+    <label for="descricao">Descrição:</label>
+    <input id="descricao" name="produto.Descricao" value="@ViewBag.Produtos.Descricao" class="form-control" />
+    <br />
+    <label for="quantidade">Quantidade:</label>
+    <input id="quantidade" name="produto.Quantidade" value="@ViewBag.Produtos.Quantidade" class="form-control" />
+    <br />
+    <label for="categoria">Categoria:</label>
+    <select id="categoria" name="produto.CategoriaId" class="form-control">
+        @foreach (var categoria in ViewBag.Categorias)
+        {
+            <option value="@categoria.Id" selected="@categoria.Id.Equals(ViewBag.Produtos.CategoriaId)">@categoria.Nome</option>
+        }
+    </select>
+    @Html.ValidationMessage("produto.InformaticaComPrecoInvalido")
+    <br />
+    <input type="submit" value="Cadastrar" />
+</form>
