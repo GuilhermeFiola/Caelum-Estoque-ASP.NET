@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <form id="form1" name="form1" class="form1" method="post" >
+            <div>    
+                <label for="gender">Gender</label>
+                <br /><input type="radio" name="gender" value="female" id="gender_0" />Female
+                <br /><input type="radio" name="gender" value="male" id="gender_1" />Male
+            </div>
+            <div>
+                <label for="name">Name</label>                    
+                <input type="text" name="name" id="name" />
+            </div>
+
+            <br /><br />
+            <input type="submit" name="Submit" value="Submit" />
+        </form>
+    </body>
+
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.min.js"></script>
+    <script>
+        $("#form1").validate({
+            rules: {
+                gender: "required",
+                name: "required"
+            },
+            messages: {
+                gender: " - Please select gender",
+                name: " - Please enter your name"
+            },
+            errorElement: "span",
+            errorPlacement: function(error, element) {
+                element.siblings("label").append(error);
+            },
+            highlight: function(element) {
+                $(element).siblings("label").addClass("error");
+            },
+            unhighlight: function(element) {
+                $(element).siblings("label").removeClass("error");
+            }
+        });
+    </script>
+</html>
+
