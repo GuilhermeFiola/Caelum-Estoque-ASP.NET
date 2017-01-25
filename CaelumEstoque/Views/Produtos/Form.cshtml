@@ -1,4 +1,4 @@
-﻿<form action="/Produtos/Adiciona" method="post">
+﻿<form id="formulario">
     <label for="nome">Nome:</label>
     <input id="nome" name="produto.Nome" value="@ViewBag.Produtos.Nome" class="form-control"/>
     @Html.ValidationMessage("produto.Nome")
@@ -23,3 +23,35 @@
     <br />
     <input type="submit" value="Cadastrar" />
 </form>
+
+<script>
+    $("#formulario").submit(function(){
+        var nome = $("#nome").val();
+        if (nome == "") {
+            alert("Nome deverá ser preenchido!");
+            return false;
+        } else {
+            Inserir();
+        }
+    });
+
+    function Inserir() {
+        //action="/Produtos/Adiciona" method="post"
+        var url = "/Produtos/Adiciona";
+        var nome = $("#nome").val();
+        var preco = $("#preco").val();
+        var descricao = $("#descricao").val();
+        var quantidade = $("#quantidade").val();
+        var idCategoria = $("#categoria").val();
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            datatype: "json",
+            data: { Id: 0, Nome: nome, Preco: preco, Descricao: descricao, Quantidade: quantidade, CategoriaId: idCategoria},
+            success: function (retorno) {
+                Alert("Cadastrado o cliente: " + retorno.data);
+            }
+        });
+    }
+</script>

@@ -64,24 +64,24 @@ namespace CaelumEstoque.Controllers
                 ModelState.AddModelError("produto.InformaticaComPrecoInvalido", "Produtos da categoria informática não podem ter preço menor que R$ 100,00.");
             }
 
-            if (ModelState.IsValid)
-            {
+            /*if (ModelState.IsValid)
+            {*/
                 //ProdutosDAO produtosDAO = new ProdutosDAO();
                 //produtosDAO.Adiciona(produto);
                 String sql = "insert into Produtoes (Nome, Preco, CategoriaId, Descricao, Quantidade) Values ('" +
                               produto.Nome + "'," + produto.Preco + "," + produto.CategoriaId + ",'" + produto.Descricao + "'," + produto.Quantidade + ")";
 
                 ExecutaQuery(sql, stringDeConexao);
-                return RedirectToAction("Index", "Produtos");
-            }
-            else
+                return Json(new {data = produto.Nome}, JsonRequestBehavior.AllowGet); //RedirectToAction("Index", "Produtos");
+            //}
+            /*else
             {
                 CategoriasDAO categoriasDAO = new CategoriasDAO();
                 IList<CategoriaDoProduto> categorias = categoriasDAO.Lista();
                 ViewBag.Categorias = categorias;
                 ViewBag.Produtos = produto;
                 return View("Form");
-            }
+            }*/
         }
 
         [Route("produtosvisualiza/{id}", Name="VisualizaProdutos")]
